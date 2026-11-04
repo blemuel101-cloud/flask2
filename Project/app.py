@@ -59,7 +59,7 @@ def login_ids():# This function organizes the csv file to organize the student a
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
-    with open(os.path.join(base_dir, 'studentcheck.csv'), 'r') as file: #Reads the csv file.
+    with open(os.path.join(base_dir, 'student_checkin.csv'), 'r') as file:
         reader = csv.reader(file)
         next(reader)  # skip header
 
