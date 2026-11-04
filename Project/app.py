@@ -12,13 +12,22 @@ import firebase_admin
 import uuid
 from firebase_admin import credentials, db
 from wtforms.validators import DataRequired, Length
-#Globals
-app = Flask(__name__)
-app.secret_key = "secret_key"
-cred = credentials.Certificate("api.json")
+import json
+
+firebase_credentials = os.environ.get("FIREBASE_CREDENTIALS")
+
+if firebase_credentials:
+    cred = credentials.Certificate(json.loads(firebase_credentials))
+else:
+    cred = credentials.Certificate("api.json")
+
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://student-a5554-default-rtdb.firebaseio.com/'
 })
+#Globals
+app = Flask(__name__)
+app.secret_key = "secret_key"
+
 #correct_code = db.reference("checkin_code").get()
 
 student_time = datetime.now().strftime("%I:%M %p")
